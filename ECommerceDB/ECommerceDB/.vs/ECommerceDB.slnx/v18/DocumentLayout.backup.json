@@ -1,0 +1,120 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\LUMS\\Spring 2025\\Database\\Project\\ECommerceDB\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{20C8D0E8-F2AF-4D8F-8112-3BB3624A93E5}|ECommerceDB.csproj|c:\\lums\\spring 2025\\database\\project\\ecommercedb\\repositories\\storedprocedurerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{20C8D0E8-F2AF-4D8F-8112-3BB3624A93E5}|ECommerceDB.csproj|solutionrelative:repositories\\storedprocedurerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{20C8D0E8-F2AF-4D8F-8112-3BB3624A93E5}|ECommerceDB.csproj|c:\\lums\\spring 2025\\database\\project\\ecommercedb\\ecommercemodel.edmx||{C99AEA30-8E36-4515-B76F-496F5A48A6AA}|",
+      "RelativeMoniker": "D:0:0:{20C8D0E8-F2AF-4D8F-8112-3BB3624A93E5}|ECommerceDB.csproj|solutionrelative:ecommercemodel.edmx||{C99AEA30-8E36-4515-B76F-496F5A48A6AA}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{20C8D0E8-F2AF-4D8F-8112-3BB3624A93E5}|ECommerceDB.csproj|c:\\lums\\spring 2025\\database\\project\\ecommercedb\\repositories\\linqrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{20C8D0E8-F2AF-4D8F-8112-3BB3624A93E5}|ECommerceDB.csproj|solutionrelative:repositories\\linqrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{20C8D0E8-F2AF-4D8F-8112-3BB3624A93E5}|ECommerceDB.csproj|c:\\lums\\spring 2025\\database\\project\\ecommercedb\\repositories\\iecommercerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{20C8D0E8-F2AF-4D8F-8112-3BB3624A93E5}|ECommerceDB.csproj|solutionrelative:repositories\\iecommercerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{20C8D0E8-F2AF-4D8F-8112-3BB3624A93E5}|ECommerceDB.csproj|c:\\lums\\spring 2025\\database\\project\\ecommercedb\\repositories\\repositoryfactory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{20C8D0E8-F2AF-4D8F-8112-3BB3624A93E5}|ECommerceDB.csproj|solutionrelative:repositories\\repositoryfactory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{20C8D0E8-F2AF-4D8F-8112-3BB3624A93E5}|ECommerceDB.csproj|c:\\lums\\spring 2025\\database\\project\\ecommercedb\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{20C8D0E8-F2AF-4D8F-8112-3BB3624A93E5}|ECommerceDB.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ECommerceModel.edmx [Diagram1]",
+              "DocumentMoniker": "C:\\LUMS\\Spring 2025\\Database\\Project\\ECommerceDB\\ECommerceModel.edmx",
+              "RelativeDocumentMoniker": "ECommerceModel.edmx",
+              "ToolTip": "C:\\LUMS\\Spring 2025\\Database\\Project\\ECommerceDB\\ECommerceModel.edmx [Diagram1]",
+              "RelativeToolTip": "ECommerceModel.edmx [Diagram1]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001116|",
+              "WhenOpened": "2025-12-01T16:03:14.509Z",
+              "EditorCaption": " [Diagram1]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "RepositoryFactory.cs",
+              "DocumentMoniker": "C:\\LUMS\\Spring 2025\\Database\\Project\\ECommerceDB\\Repositories\\RepositoryFactory.cs",
+              "RelativeDocumentMoniker": "Repositories\\RepositoryFactory.cs",
+              "ToolTip": "C:\\LUMS\\Spring 2025\\Database\\Project\\ECommerceDB\\Repositories\\RepositoryFactory.cs",
+              "RelativeToolTip": "Repositories\\RepositoryFactory.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-01T15:54:33.298Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "StoredProcedureRepository.cs",
+              "DocumentMoniker": "C:\\LUMS\\Spring 2025\\Database\\Project\\ECommerceDB\\Repositories\\StoredProcedureRepository.cs",
+              "RelativeDocumentMoniker": "Repositories\\StoredProcedureRepository.cs",
+              "ToolTip": "C:\\LUMS\\Spring 2025\\Database\\Project\\ECommerceDB\\Repositories\\StoredProcedureRepository.cs",
+              "RelativeToolTip": "Repositories\\StoredProcedureRepository.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAABIAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-29T06:46:26.807Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "LinqRepository.cs",
+              "DocumentMoniker": "C:\\LUMS\\Spring 2025\\Database\\Project\\ECommerceDB\\Repositories\\LinqRepository.cs",
+              "RelativeDocumentMoniker": "Repositories\\LinqRepository.cs",
+              "ToolTip": "C:\\LUMS\\Spring 2025\\Database\\Project\\ECommerceDB\\Repositories\\LinqRepository.cs",
+              "RelativeToolTip": "Repositories\\LinqRepository.cs",
+              "ViewState": "AgIAAFUAAAAAAAAAAAAcwHEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-29T06:41:17.163Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "IECommerceRepository.cs",
+              "DocumentMoniker": "C:\\LUMS\\Spring 2025\\Database\\Project\\ECommerceDB\\Repositories\\IECommerceRepository.cs",
+              "RelativeDocumentMoniker": "Repositories\\IECommerceRepository.cs",
+              "ToolTip": "C:\\LUMS\\Spring 2025\\Database\\Project\\ECommerceDB\\Repositories\\IECommerceRepository.cs",
+              "RelativeToolTip": "Repositories\\IECommerceRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-29T06:33:45.643Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Form1.cs [Design]",
+              "DocumentMoniker": "C:\\LUMS\\Spring 2025\\Database\\Project\\ECommerceDB\\Form1.cs",
+              "RelativeDocumentMoniker": "Form1.cs",
+              "ToolTip": "C:\\LUMS\\Spring 2025\\Database\\Project\\ECommerceDB\\Form1.cs [Design]",
+              "RelativeToolTip": "Form1.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-29T05:19:14.279Z",
+              "EditorCaption": " [Design]"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
