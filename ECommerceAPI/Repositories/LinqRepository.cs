@@ -13,26 +13,22 @@ public class LinqRepository : IECommerceRepository
         _context = context;
     }
 
-    // Login using LINQ
     public async Task<Customer?> LoginAsync(string email)
     {
         return await _context.Customers.FirstOrDefaultAsync(c => c.Email == email);
     }
 
-    // Register using LINQ
     public async Task RegisterCustomerAsync(Customer customer)
     {
         _context.Customers.Add(customer);
         await _context.SaveChangesAsync();
     }
 
-    // Get all products using LINQ
     public async Task<List<Product>> GetAllProductsAsync()
     {
         return await _context.Products.Include(p => p.Category).ToListAsync();
     }
 
-    // Stock status using raw SQL to call the function
     public async Task<string> GetStockStatusAsync(int productId)
     {
         var result = await _context.Database
@@ -41,7 +37,6 @@ public class LinqRepository : IECommerceRepository
         return result ?? "Unknown";
     }
 
-    // Place order using LINQ with transaction
     public async Task PlaceOrderAsync(int customerId, int productId, int quantity)
     {
         using var transaction = await _context.Database.BeginTransactionAsync();
@@ -76,7 +71,6 @@ public class LinqRepository : IECommerceRepository
         }
     }
 
-    // Get customer orders using LINQ
     public async Task<List<CustomerOrder>> GetCustomerOrdersAsync(int customerId)
     {
         var orders = await _context.Orders
@@ -116,7 +110,6 @@ public class LinqRepository : IECommerceRepository
         return result;
     }
 
-    // Get customer order summaries using LINQ (equivalent to v_CustomerOrderSummary view)
     public async Task<List<CustomerOrderSummary>> GetCustomerOrderSummariesAsync()
     {
         var result = await _context.Customers
@@ -138,7 +131,6 @@ public class LinqRepository : IECommerceRepository
         return result;
     }
 
-    // Get top customers using LINQ with CTE-like logic
     public async Task<List<TopCustomer>> GetTopCustomersAsync()
     {
         var result = await _context.Orders
@@ -161,7 +153,6 @@ public class LinqRepository : IECommerceRepository
         return result;
     }
 
-    // Get product sales status using LINQ (equivalent to v_ProductSalesStatus view)
     public async Task<List<ProductSalesStatus>> GetProductSalesStatusAsync()
     {
         var result = await _context.Products
@@ -178,6 +169,14 @@ public class LinqRepository : IECommerceRepository
                 })
             .ToListAsync();
 
+        return result;
+    }
+
+    public async Task<decimal> GetPotentialDiscountAsync(int customerId)
+    {
+        var result = await _context.Database
+            .SqlQuery<decimal>($"SELECT dbo.fn_CalculatePotentialDiscount({customerId}) AS Value")
+            .FirstOrDefaultAsync();
         return result;
     }
 }

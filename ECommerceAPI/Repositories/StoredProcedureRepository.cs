@@ -14,7 +14,6 @@ public class StoredProcedureRepository : IECommerceRepository
         _context = context;
     }
 
-    // Login using stored procedure
     public async Task<Customer?> LoginAsync(string email)
     {
         var result = await _context.Customers
@@ -23,7 +22,6 @@ public class StoredProcedureRepository : IECommerceRepository
         return result.FirstOrDefault();
     }
 
-    // Register using stored procedure
     public async Task RegisterCustomerAsync(Customer customer)
     {
         await _context.Database.ExecuteSqlRawAsync(
@@ -34,7 +32,6 @@ public class StoredProcedureRepository : IECommerceRepository
             new SqlParameter("@City", customer.City ?? (object)DBNull.Value));
     }
 
-    // Get all products using stored procedure
     public async Task<List<Product>> GetAllProductsAsync()
     {
         return await _context.Products
@@ -42,7 +39,6 @@ public class StoredProcedureRepository : IECommerceRepository
             .ToListAsync();
     }
 
-    // Stock status using stored procedure
     public async Task<string> GetStockStatusAsync(int productId)
     {
         var result = await _context.Database
@@ -51,7 +47,6 @@ public class StoredProcedureRepository : IECommerceRepository
         return result ?? "Unknown";
     }
 
-    // Place order using stored procedure
     public async Task PlaceOrderAsync(int customerId, int productId, int quantity)
     {
         await _context.Database.ExecuteSqlRawAsync(
@@ -61,7 +56,6 @@ public class StoredProcedureRepository : IECommerceRepository
             new SqlParameter("@Quantity", quantity));
     }
 
-    // Get customer orders using raw SQL
     public async Task<List<CustomerOrder>> GetCustomerOrdersAsync(int customerId)
     {
         var orders = await _context.Orders
@@ -95,7 +89,6 @@ public class StoredProcedureRepository : IECommerceRepository
         return result;
     }
 
-    // Get customer order summaries using the view
     public async Task<List<CustomerOrderSummary>> GetCustomerOrderSummariesAsync()
     {
         var result = await _context.Database
@@ -104,7 +97,6 @@ public class StoredProcedureRepository : IECommerceRepository
         return result.Take(100).ToList();
     }
 
-    // Get top customers using stored procedure
     public async Task<List<TopCustomer>> GetTopCustomersAsync()
     {
         return await _context.Database
@@ -112,11 +104,18 @@ public class StoredProcedureRepository : IECommerceRepository
             .ToListAsync();
     }
 
-    // Get product sales status using the view
     public async Task<List<ProductSalesStatus>> GetProductSalesStatusAsync()
     {
         return await _context.Database
             .SqlQuery<ProductSalesStatus>($"SELECT * FROM v_ProductSalesStatus")
             .ToListAsync();
+    }
+
+    public async Task<decimal> GetPotentialDiscountAsync(int customerId)
+    {
+        var result = await _context.Database
+            .SqlQuery<decimal>($"SELECT dbo.fn_CalculatePotentialDiscount({customerId}) AS Value")
+            .FirstOrDefaultAsync();
+        return result;
     }
 }

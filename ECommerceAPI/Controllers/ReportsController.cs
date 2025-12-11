@@ -14,9 +14,6 @@ public class ReportsController : ControllerBase
         _repoFactory = repoFactory;
     }
 
-    /// <summary>
-    /// Get customer order summaries
-    /// </summary>
     [HttpGet("customer-summaries")]
     public async Task<ActionResult> GetCustomerOrderSummaries()
     {
@@ -32,9 +29,6 @@ public class ReportsController : ControllerBase
         }
     }
 
-    /// <summary>
-    /// Get top 10 customers by spending
-    /// </summary>
     [HttpGet("top-customers")]
     public async Task<ActionResult> GetTopCustomers()
     {
@@ -43,6 +37,29 @@ public class ReportsController : ControllerBase
             var repo = _repoFactory.GetRepository();
             var topCustomers = await repo.GetTopCustomersAsync();
             return Ok(topCustomers);
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(new { message = ex.Message });
+        }
+    }
+
+    [HttpGet("potential-discount/{customerId}")]
+    public async Task<ActionResult> GetPotentialDiscount(int customerId)
+    {
+        try
+        {
+            var repo = _repoFactory.GetRepository();
+            var discount = await repo.GetPotentialDiscountAsync(customerId);
+            return Ok(new
+            {
+                customerId,
+                potentialDiscount = discount,
+                isEligible = discount > 0,
+                message = discount > 0
+                    ? $"You've earned ${discount:F2} in loyalty discounts!"
+                    : "Spend over $5,000 to unlock 10% loyalty discount"
+            });
         }
         catch (Exception ex)
         {

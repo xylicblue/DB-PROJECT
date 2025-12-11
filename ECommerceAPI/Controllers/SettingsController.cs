@@ -7,9 +7,6 @@ namespace ECommerceAPI.Controllers;
 [Route("api/[controller]")]
 public class SettingsController : ControllerBase
 {
-    /// <summary>
-    /// Get current repository mode
-    /// </summary>
     [HttpGet("mode")]
     public ActionResult GetMode()
     {
@@ -22,9 +19,6 @@ public class SettingsController : ControllerBase
         });
     }
 
-    /// <summary>
-    /// Switch repository mode (LINQ or StoredProcedure)
-    /// </summary>
     [HttpPost("mode")]
     public ActionResult SetMode([FromBody] SetModeRequest request)
     {

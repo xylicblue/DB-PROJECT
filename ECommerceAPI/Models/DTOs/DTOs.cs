@@ -3,6 +3,7 @@ namespace ECommerceAPI.Models.DTOs;
 public class LoginRequest
 {
     public string Email { get; set; } = string.Empty;
+    public string Password { get; set; } = string.Empty;
 }
 
 public class RegisterRequest
@@ -10,6 +11,7 @@ public class RegisterRequest
     public string FirstName { get; set; } = string.Empty;
     public string LastName { get; set; } = string.Empty;
     public string Email { get; set; } = string.Empty;
+    public string Password { get; set; } = string.Empty;
     public string? City { get; set; }
 }
 
@@ -58,4 +60,11 @@ public class OrderItemDetail
     public string ProductName { get; set; } = string.Empty;
     public int Quantity { get; set; }
     public decimal UnitPrice { get; set; }
+}
+
+public class CustomerDiscount
+{
+    public int CustomerID { get; set; }
+    public decimal PotentialDiscount { get; set; }
+    public bool IsEligible { get; set; }
 }

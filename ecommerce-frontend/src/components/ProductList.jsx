@@ -240,7 +240,7 @@ function ProductList({ onOrder, refreshKey }) {
 
               {/* Add to Cart Button */}
               <button
-                onClick={onOrder}
+                onClick={() => onOrder(product)}
                 className="w-full mt-4 bg-indigo-600 text-white py-2.5 rounded-lg font-medium hover:bg-indigo-700 transition-colors flex items-center justify-center space-x-2"
               >
                 <svg

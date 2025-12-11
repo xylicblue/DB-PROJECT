@@ -2,7 +2,8 @@ import { useState } from "react";
 import { login, register } from "../api";
 
 function LoginForm({ onLogin, onClose }) {
-  const [email, setEmail] = useState("user1@example.com");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [isRegister, setIsRegister] = useState(false);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -15,7 +16,7 @@ function LoginForm({ onLogin, onClose }) {
     setLoading(true);
     setError("");
     try {
-      const response = await login(email);
+      const response = await login(email, password);
       onLogin(response.data);
     } catch (err) {
       setError(err.response?.data?.message || "Login failed");
@@ -28,8 +29,8 @@ function LoginForm({ onLogin, onClose }) {
     setLoading(true);
     setError("");
     try {
-      await register({ firstName, lastName, email, city });
-      const response = await login(email);
+      await register({ firstName, lastName, email, password, city });
+      const response = await login(email, password);
       onLogin(response.data);
     } catch (err) {
       setError(err.response?.data?.message || "Registration failed");
@@ -126,6 +127,20 @@ function LoginForm({ onLogin, onClose }) {
               placeholder="you@example.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              required
+              className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all"
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Password
+            </label>
+            <input
+              type="password"
+              placeholder="Enter your password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               required
               className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all"
             />

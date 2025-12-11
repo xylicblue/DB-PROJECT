@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { placeOrder } from "../api";
 
-function OrderForm({ customer, onClose, onOrderComplete }) {
-  const [productId, setProductId] = useState("");
+function OrderForm({ customer, onClose, onOrderComplete, selectedProduct }) {
+  const [productId, setProductId] = useState(
+    selectedProduct?.productID?.toString() || ""
+  );
   const [quantity, setQuantity] = useState(1);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -80,6 +82,37 @@ function OrderForm({ customer, onClose, onOrderComplete }) {
 
         {/* Form */}
         <form onSubmit={handleSubmit} className="p-6 space-y-4">
+          {/* Selected Product Info (if from Add to Cart) */}
+          {selectedProduct && (
+            <div className="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+              <div className="flex items-center space-x-3">
+                <div className="w-12 h-12 bg-gradient-to-br from-indigo-100 to-purple-100 rounded-lg flex items-center justify-center">
+                  <svg
+                    className="w-6 h-6 text-indigo-600"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"
+                    />
+                  </svg>
+                </div>
+                <div>
+                  <p className="font-semibold text-gray-900">
+                    {selectedProduct.productName}
+                  </p>
+                  <p className="text-sm text-indigo-600 font-medium">
+                    ${selectedProduct.price?.toFixed(2)}
+                  </p>
+                </div>
+              </div>
+            </div>
+          )}
+
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
               Product ID
@@ -106,12 +139,17 @@ function OrderForm({ customer, onClose, onOrderComplete }) {
                 min="1"
                 max="50"
                 required
-                className="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition-all"
+                readOnly={!!selectedProduct}
+                className={`w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition-all ${
+                  selectedProduct ? "bg-gray-100 cursor-not-allowed" : ""
+                }`}
               />
             </div>
-            <p className="mt-1 text-xs text-gray-500">
-              Products range from ID 1 to 50
-            </p>
+            {!selectedProduct && (
+              <p className="mt-1 text-xs text-gray-500">
+                Products range from ID 1 to 50
+              </p>
+            )}
           </div>
 
           <div>

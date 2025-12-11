@@ -15,9 +15,6 @@ public class OrdersController : ControllerBase
         _repoFactory = repoFactory;
     }
 
-    /// <summary>
-    /// Place a new order
-    /// </summary>
     [HttpPost]
     public async Task<ActionResult> PlaceOrder([FromBody] PlaceOrderRequest request)
     {
@@ -33,9 +30,6 @@ public class OrdersController : ControllerBase
         }
     }
 
-    /// <summary>
-    /// Get orders for a specific customer
-    /// </summary>
     [HttpGet("customer/{customerId}")]
     public async Task<ActionResult> GetCustomerOrders(int customerId)
     {

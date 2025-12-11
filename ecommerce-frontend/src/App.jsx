@@ -5,7 +5,7 @@ import ProductList from "./components/ProductList";
 import OrderForm from "./components/OrderForm";
 import Reports from "./components/Reports";
 import MyOrders from "./components/MyOrders";
-import { getMode, setMode } from "./api";
+import { getMode, setMode, getPotentialDiscount } from "./api";
 
 function App() {
   const [customer, setCustomer] = useState(null);
@@ -17,14 +17,36 @@ function App() {
   const [activeTab, setActiveTab] = useState("home");
   const [cartCount] = useState(0);
   const [refreshProducts, setRefreshProducts] = useState(0);
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [discount, setDiscount] = useState(null);
 
   const handleOrderComplete = () => {
     setRefreshProducts((prev) => prev + 1);
+    if (customer) {
+      loadDiscount(customer.customerID);
+    }
   };
 
   useEffect(() => {
     loadMode();
   }, []);
+
+  useEffect(() => {
+    if (customer) {
+      loadDiscount(customer.customerID);
+    } else {
+      setDiscount(null);
+    }
+  }, [customer]);
+
+  const loadDiscount = async (customerId) => {
+    try {
+      const response = await getPotentialDiscount(customerId);
+      setDiscount(response.data);
+    } catch (err) {
+      console.error("Failed to load discount", err);
+    }
+  };
 
   const loadMode = async () => {
     try {
@@ -54,11 +76,12 @@ function App() {
     setCustomer(null);
   };
 
-  const handlePlaceOrder = () => {
+  const handlePlaceOrder = (product = null) => {
     if (!customer) {
       setShowLogin(true);
       return;
     }
+    setSelectedProduct(product);
     setShowOrder(true);
   };
 
@@ -198,7 +221,28 @@ function App() {
                       {customer.firstName?.charAt(0)}
                       {customer.lastName?.charAt(0)}
                     </button>
-                    <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all">
+                    <div className="absolute right-0 mt-2 w-56 bg-white rounded-lg shadow-lg py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all">
+                      {discount && (
+                        <div
+                          className={`px-4 py-2 border-b border-gray-100 ${
+                            discount.isEligible ? "bg-green-50" : "bg-gray-50"
+                          }`}
+                        >
+                          <p className="text-xs text-gray-500">
+                            Loyalty Discount
+                          </p>
+                          {discount.isEligible ? (
+                            <p className="text-sm font-semibold text-green-600">
+                              🎉 ${discount.potentialDiscount.toFixed(2)}{" "}
+                              earned!
+                            </p>
+                          ) : (
+                            <p className="text-xs text-gray-600">
+                              Spend $5,000+ to unlock 10% off
+                            </p>
+                          )}
+                        </div>
+                      )}
                       <button
                         onClick={() => setShowMyOrders(true)}
                         className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 flex items-center space-x-2"
@@ -526,8 +570,12 @@ function App() {
       {showOrder && customer && (
         <OrderForm
           customer={customer}
-          onClose={() => setShowOrder(false)}
+          onClose={() => {
+            setShowOrder(false);
+            setSelectedProduct(null);
+          }}
           onOrderComplete={handleOrderComplete}
+          selectedProduct={selectedProduct}
         />
       )}
       {showReports && <Reports onClose={() => setShowReports(false)} />}

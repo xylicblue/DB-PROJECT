@@ -1,10 +1,15 @@
 import { useState } from "react";
-import { getCustomerSummaries, getTopCustomers } from "../api";
+import {
+  getCustomerSummaries,
+  getTopCustomers,
+  getProductSalesStatus,
+} from "../api";
 
 function Reports({ onClose }) {
   const [activeTab, setActiveTab] = useState("summaries");
   const [summaries, setSummaries] = useState([]);
   const [topCustomers, setTopCustomers] = useState([]);
+  const [salesStatus, setSalesStatus] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [loaded, setLoaded] = useState(false);
@@ -13,12 +18,14 @@ function Reports({ onClose }) {
     setLoading(true);
     setError("");
     try {
-      const [summariesRes, topRes] = await Promise.all([
+      const [summariesRes, topRes, salesRes] = await Promise.all([
         getCustomerSummaries(),
         getTopCustomers(),
+        getProductSalesStatus(),
       ]);
       setSummaries(summariesRes.data);
       setTopCustomers(topRes.data);
+      setSalesStatus(salesRes.data);
       setLoaded(true);
     } catch (err) {
       setError(err.response?.data?.message || "Failed to load reports");
@@ -129,6 +136,31 @@ function Reports({ onClose }) {
                   />
                 </svg>
                 <span>Top 10 Customers</span>
+              </span>
+            </button>
+            <button
+              className={`py-4 border-b-2 font-medium text-sm transition-colors ${
+                activeTab === "sales"
+                  ? "border-purple-600 text-purple-600"
+                  : "border-transparent text-gray-500 hover:text-gray-700"
+              }`}
+              onClick={() => setActiveTab("sales")}
+            >
+              <span className="flex items-center space-x-2">
+                <svg
+                  className="w-4 h-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
+                  />
+                </svg>
+                <span>Product Sales</span>
               </span>
             </button>
           </div>
@@ -275,7 +307,7 @@ function Reports({ onClose }) {
                 </tbody>
               </table>
             </div>
-          ) : (
+          ) : activeTab === "top" ? (
             <div className="space-y-4">
               {topCustomers.map((c, i) => (
                 <div
@@ -315,6 +347,60 @@ function Reports({ onClose }) {
                 </div>
               ))}
             </div>
+          ) : (
+            <div className="overflow-x-auto">
+              <table className="w-full">
+                <thead>
+                  <tr className="bg-gray-50">
+                    <th className="text-left py-3 px-4 font-semibold text-gray-700 rounded-l-lg">
+                      Product ID
+                    </th>
+                    <th className="text-left py-3 px-4 font-semibold text-gray-700">
+                      Product Name
+                    </th>
+                    <th className="text-right py-3 px-4 font-semibold text-gray-700">
+                      Current Stock
+                    </th>
+                    <th className="text-right py-3 px-4 font-semibold text-gray-700 rounded-r-lg">
+                      Total Units Sold
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-gray-100">
+                  {salesStatus.map((p) => (
+                    <tr
+                      key={p.productID}
+                      className="hover:bg-gray-50 transition-colors"
+                    >
+                      <td className="py-3 px-4">
+                        <span className="bg-purple-100 text-purple-800 text-xs font-medium px-2.5 py-1 rounded-full">
+                          #{p.productID}
+                        </span>
+                      </td>
+                      <td className="py-3 px-4 font-medium text-gray-900">
+                        {p.productName}
+                      </td>
+                      <td className="py-3 px-4 text-right">
+                        <span
+                          className={`font-semibold ${
+                            p.currentStock < 100
+                              ? "text-red-600"
+                              : "text-green-600"
+                          }`}
+                        >
+                          {p.currentStock.toLocaleString()}
+                        </span>
+                      </td>
+                      <td className="py-3 px-4 text-right">
+                        <span className="font-semibold text-indigo-600">
+                          {p.totalUnitsSold.toLocaleString()}
+                        </span>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           )}
         </div>
 
@@ -326,7 +412,9 @@ function Reports({ onClose }) {
                 `Showing ${
                   activeTab === "summaries"
                     ? summaries.length
-                    : topCustomers.length
+                    : activeTab === "top"
+                    ? topCustomers.length
+                    : salesStatus.length
                 } records`}
             </p>
             {loaded && (

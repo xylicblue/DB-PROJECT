@@ -10,7 +10,8 @@ const api = axios.create({
 });
 
 // Auth endpoints
-export const login = (email) => api.post("/auth/login", { email });
+export const login = (email, password) =>
+  api.post("/auth/login", { email, password });
 export const register = (data) => api.post("/auth/register", data);
 
 // Products endpoints
@@ -29,6 +30,8 @@ export const getCustomerOrders = (customerId) =>
 export const getCustomerSummaries = () =>
   api.get("/reports/customer-summaries");
 export const getTopCustomers = () => api.get("/reports/top-customers");
+export const getPotentialDiscount = (customerId) =>
+  api.get(`/reports/potential-discount/${customerId}`);
 
 // Settings endpoints
 export const getMode = () => api.get("/settings/mode");

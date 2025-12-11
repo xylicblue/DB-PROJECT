@@ -151,3 +151,4 @@ D:\University\LUMS\FALL 25~\DB\project\ECommerceAPI\obj\Debug\net9.0\refint\ECom
 D:\University\LUMS\FALL 25~\DB\project\ECommerceAPI\obj\Debug\net9.0\ECommerceAPI.pdb
 D:\University\LUMS\FALL 25~\DB\project\ECommerceAPI\obj\Debug\net9.0\ECommerceAPI.genruntimeconfig.cache
 D:\University\LUMS\FALL 25~\DB\project\ECommerceAPI\obj\Debug\net9.0\ref\ECommerceAPI.dll
+D:\University\LUMS\FALL 25~\DB\project\ECommerceAPI\obj\Debug\net9.0\ECommerceAPI.sourcelink.json

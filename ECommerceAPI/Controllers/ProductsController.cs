@@ -15,9 +15,6 @@ public class ProductsController : ControllerBase
         _repoFactory = repoFactory;
     }
 
-    /// <summary>
-    /// Get all products
-    /// </summary>
     [HttpGet]
     public async Task<ActionResult<List<Product>>> GetAllProducts()
     {
@@ -33,9 +30,6 @@ public class ProductsController : ControllerBase
         }
     }
 
-    /// <summary>
-    /// Get stock status for a product
-    /// </summary>
     [HttpGet("{productId}/stock-status")]
     public async Task<ActionResult<string>> GetStockStatus(int productId)
     {
@@ -51,9 +45,6 @@ public class ProductsController : ControllerBase
         }
     }
 
-    /// <summary>
-    /// Get product sales status (stock vs sold)
-    /// </summary>
     [HttpGet("sales-status")]
     public async Task<ActionResult> GetProductSalesStatus()
     {
