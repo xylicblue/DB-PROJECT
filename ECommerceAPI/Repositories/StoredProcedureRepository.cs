@@ -34,9 +34,24 @@ public class StoredProcedureRepository : IECommerceRepository
 
     public async Task<List<Product>> GetAllProductsAsync()
     {
-        return await _context.Products
+        var products = await _context.Products
             .FromSqlRaw("EXEC sp_GetAllProducts")
             .ToListAsync();
+
+        var categoryIds = products.Select(p => p.CategoryID).Distinct().ToList();
+        var categories = await _context.Categories
+            .Where(c => categoryIds.Contains(c.CategoryID))
+            .ToDictionaryAsync(c => c.CategoryID);
+
+        foreach (var product in products)
+        {
+            if (categories.TryGetValue(product.CategoryID, out var category))
+            {
+                product.Category = category;
+            }
+        }
+
+        return products;
     }
 
     public async Task<string> GetStockStatusAsync(int productId)
@@ -59,21 +74,24 @@ public class StoredProcedureRepository : IECommerceRepository
     public async Task<List<CustomerOrder>> GetCustomerOrdersAsync(int customerId)
     {
         var orders = await _context.Orders
-            .FromSqlRaw("SELECT * FROM Orders WHERE CustomerID = @CustomerID ORDER BY OrderDate DESC",
+            .FromSqlRaw("SELECT TOP 50 * FROM Orders WHERE CustomerID = @CustomerID ORDER BY OrderDate DESC",
                 new SqlParameter("@CustomerID", customerId))
-            .Take(50)
             .ToListAsync();
 
         var result = new List<CustomerOrder>();
 
         foreach (var order in orders)
         {
+            var orderDateParam = new SqlParameter("@OrderDate", order.OrderDate);
+            var orderIdParam = new SqlParameter("@OrderID", order.OrderID);
+
             var items = await _context.Database
-                .SqlQuery<OrderItemDetail>($@"
+                .SqlQueryRaw<OrderItemDetail>(@"
                     SELECT od.ProductID, p.ProductName, od.Quantity, od.UnitPrice 
                     FROM OrderDetails od 
                     INNER JOIN Products p ON od.ProductID = p.ProductID 
-                    WHERE od.OrderID = {order.OrderID} AND od.OrderDate = {order.OrderDate}")
+                    WHERE od.OrderID = @OrderID AND od.OrderDate = @OrderDate",
+                    orderIdParam, orderDateParam)
                 .ToListAsync();
 
             result.Add(new CustomerOrder

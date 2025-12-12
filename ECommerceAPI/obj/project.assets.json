@@ -4748,11 +4748,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\University\\LUMS\\FALL 25~\\DB\\project\\ECommerceAPI\\ECommerceAPI.csproj",
+      "projectUniqueName": "D:\\University\\LUMS\\FALL 25~\\DB\\test\\DB-PROJECT\\ECommerceAPI\\ECommerceAPI.csproj",
       "projectName": "ECommerceAPI",
-      "projectPath": "D:\\University\\LUMS\\FALL 25~\\DB\\project\\ECommerceAPI\\ECommerceAPI.csproj",
+      "projectPath": "D:\\University\\LUMS\\FALL 25~\\DB\\test\\DB-PROJECT\\ECommerceAPI\\ECommerceAPI.csproj",
       "packagesPath": "C:\\Users\\xylic\\.nuget\\packages\\",
-      "outputPath": "D:\\University\\LUMS\\FALL 25~\\DB\\project\\ECommerceAPI\\obj\\",
+      "outputPath": "D:\\University\\LUMS\\FALL 25~\\DB\\test\\DB-PROJECT\\ECommerceAPI\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\xylic\\AppData\\Roaming\\NuGet\\NuGet.Config"
