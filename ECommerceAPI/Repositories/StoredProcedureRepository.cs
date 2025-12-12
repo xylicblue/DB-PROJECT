@@ -56,10 +56,10 @@ public class StoredProcedureRepository : IECommerceRepository
 
     public async Task<string> GetStockStatusAsync(int productId)
     {
-        var result = await _context.Database
+        var results = await _context.Database
             .SqlQuery<string>($"EXEC sp_GetStockStatus @ProductID = {productId}")
-            .FirstOrDefaultAsync();
-        return result ?? "Unknown";
+            .ToListAsync();
+        return results.FirstOrDefault() ?? "Unknown";
     }
 
     public async Task PlaceOrderAsync(int customerId, int productId, int quantity)
