@@ -5,7 +5,7 @@ echo   E-COMMERCE PROJECT - EXTRA CREDIT DEPLOYMENT
 echo ===================================================
 
 echo.
-echo [Step 1] Building Docker Images (This takes a few minutes)...
+echo  Building Docker Images ...
 echo ---------------------------------------------------
 cd ECommerceAPI
 docker build -t ecommerce-backend:latest .
@@ -14,7 +14,7 @@ docker build -t ecommerce-frontend:latest .
 cd ..
 
 echo.
-echo [Step 2] Applying Kubernetes Configurations...
+echo Applying Kubernetes Configurations...
 echo ---------------------------------------------------
 kubectl apply -f k8s-scripts/storage-and-secret.yaml
 kubectl apply -f k8s-scripts/database.yaml
@@ -22,7 +22,7 @@ kubectl apply -f k8s-scripts/backend.yaml
 kubectl apply -f k8s-scripts/frontend.yaml
 
 echo.
-echo [Step 3] Verifying Deployment...
+echo Verifying Deployment...
 echo ---------------------------------------------------
 echo Waiting 15 seconds for pods to initialize...
 timeout /t 15
@@ -30,7 +30,7 @@ kubectl get pods
 
 echo.
 echo ===================================================
-echo   [Step 4] OPENING CONNECTION TUNNELS
+echo   OPENING CONNECTION TUNNELS
 echo   Opening 3 separate windows for Port Forwarding.
 echo   DO NOT CLOSE THEM!
 echo ===================================================
