@@ -19,7 +19,7 @@ spec:
         ports:
         - containerPort: 8080
         env:
-        - name: ConnectionStrings__DefaultConnection
+        - name: ConnectionStrings__ECommerceDB
           value: "Server=mssql-service,1433;Database=ECommerceDB;User Id=sa;Password=Str0ng!Pass123;TrustServerCertificate=True;"
 ---
 apiVersion: v1
