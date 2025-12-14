@@ -7,19 +7,20 @@ echo ===================================================
 echo.
 echo  Building Docker Images ...
 echo ---------------------------------------------------
+cd /d "%~dp0.."
 cd ECommerceAPI
 docker build -t ecommerce-backend:latest .
 cd ..\ecommerce-frontend
 docker build -t ecommerce-frontend:latest .
-cd ..
+cd ..\k8s-scripts
 
 echo.
 echo Applying Kubernetes Configurations...
 echo ---------------------------------------------------
-kubectl apply -f k8s-scripts/storage-and-secret.yaml
-kubectl apply -f k8s-scripts/database.yaml
-kubectl apply -f k8s-scripts/backend.yaml
-kubectl apply -f k8s-scripts/frontend.yaml
+kubectl apply -f storage-and-secret.yaml
+kubectl apply -f database.yaml
+kubectl apply -f backend.yaml
+kubectl apply -f frontend.yaml
 
 echo.
 echo Verifying Deployment...

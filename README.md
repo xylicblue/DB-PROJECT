@@ -30,6 +30,12 @@ We have provided a batch script to automate building Docker images, deploying to
 
 Now that the tunnel is open on Port 1433:
 
+**Option A: Using init-database.bat (Automated)**
+1. From k8s-scripts folder, run: `init-database.bat`
+2. Wait 5-10 minutes for script to complete
+3. Database will be created and populated with 1M rows automatically
+
+**Option B: Using SSMS (Manual)**
 1. Open **SSMS** or **Azure Data Studio**.  
 2. **Connect:**  
    * **Server:** 127.0.0.1,1433  
